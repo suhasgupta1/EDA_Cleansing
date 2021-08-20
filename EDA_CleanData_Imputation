@@ -1,0 +1,14 @@
+def dropnulldata(df,j):
+    collist = list()
+    for i in df.columns:
+        print((sum(df[i].isnull())/df.shape[0])*100)
+        if (sum(df[i].isnull())/df.shape[0])*100 > (100-j):
+            collist.append(i)
+    df = df.drop(columns=collist, axis=1)
+    print('%d of columns dropped viz.%s'%(len(collist),collist))
+    return df
+    
+
+df.fillna(value= df.describe().iloc[1,:].to_dict(), inplace = True)
+ss = StandardScaler()
+df = ss.fit_transform(df)
